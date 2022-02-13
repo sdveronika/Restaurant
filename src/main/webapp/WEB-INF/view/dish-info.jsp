@@ -6,24 +6,18 @@
 <h2>User info</h2>
 <br>
 
-<form:form action="save" method="post" modelAttribute="user">
+<form:form action="saveDish" method="post" modelAttribute="dish">
 
     <form:hidden path="id" />
 
     Name <form:input path="name"/>
-    <from:errors path="name"/>
     <br><br>
-    Surname <form:input path="surname"/>
+    Description <form:input path="description"/>
     <br><br>
-    Phone <form:input path="phone"/>
+    Category <form:input path="category"/>
     <br><br>
-    Email <form:input path="email"/>
+    Price <form:input path="price"/>
     <br><br>
-    Admin <form:radiobutton path="role" value="ADMIN"/>
-    <br><br>
-    Password <form:input path="password"/>
-    <br><br>
-    Balance <form:input path="balance"/>
     <br><br>
     <input type="submit" value="Ok"/>
 

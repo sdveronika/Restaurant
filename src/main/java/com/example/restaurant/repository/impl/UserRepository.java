@@ -1,17 +1,17 @@
 package com.example.restaurant.repository.impl;
 
 import com.example.restaurant.entity.User;
+import com.example.restaurant.entity.enums.Role;
+import com.example.restaurant.repository.IUserRepository;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 @Repository
-public class UserRepository implements com.example.restaurant.repository.Repository<User, Long> {
+public class UserRepository implements IUserRepository {
 
 
 
@@ -42,5 +42,34 @@ public class UserRepository implements com.example.restaurant.repository.Reposit
                 .createQuery("delete from User where id =:id")
                 .setParameter("id", id)
                 .executeUpdate();
+    }
+
+    @Override
+    public String checkEmailAndPassword(User user){
+        String page;
+        List<User> users=entityManager.unwrap(Session.class)
+                .createQuery("from User where email=:email", User.class)
+                .setParameter("email",user.getEmail())
+                .getResultList();
+        if(users.isEmpty()){
+            page ="redirect:/api/users/logIn";
+        }
+        else{
+            User user1=users.get(0);
+
+            if(user1.getEmail().equals(user.getEmail()) && user1.getPassword().equals(user.getPassword())){
+
+                if(user1.getRole().equals(Role.USER)){
+                page= "redirect:/api/dishes/menu";
+                }
+                else{
+                    page= "redirect:/api/users/all";
+                }
+            }
+            else{
+                page ="redirect:/api/users/logIn";
+            }
+        }
+        return page;
     }
 }

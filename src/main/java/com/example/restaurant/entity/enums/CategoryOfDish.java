@@ -2,5 +2,7 @@ package com.example.restaurant.entity.enums;
 
 public enum CategoryOfDish {
     DRINKS,
-    HOT
+    HOT,
+    SNACKS,
+    DESSERTS
 }

@@ -13,4 +13,6 @@ public interface IUserService {
     void create(User user);
 
     void delete(long id);
+
+    String checkEmailAndPassword(User user);
 }

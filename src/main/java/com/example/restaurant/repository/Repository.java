@@ -11,4 +11,5 @@ public interface Repository<T,K> {
     void create (T entity);
 
     void deleteById (K id);
+
 }

@@ -38,4 +38,10 @@ public class UserService implements IUserService {
     public void delete(long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public String checkEmailAndPassword(User user) {
+        return userRepository.checkEmailAndPassword(user);
+    }
 }

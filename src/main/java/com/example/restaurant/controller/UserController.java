@@ -1,12 +1,16 @@
 package com.example.restaurant.controller;
 
 import com.example.restaurant.entity.User;
+import com.example.restaurant.entity.enums.Role;
 import com.example.restaurant.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import javax.validation.constraints.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -31,14 +35,47 @@ public class UserController {
     @GetMapping("/addUser")
     public String addUser(Model model) {
         User user = new User();
+        user.setRole(Role.ADMIN);
+        user.setBalance(0);
         model.addAttribute("user", user);
         return "user-info";
     }
 
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        User user = new User();
+        user.setRole(Role.USER);
+        user.setBalance(0);
+        model.addAttribute("user", user);
+        return "registration-page";
+    }
+
+    @GetMapping("/logIn")
+    public String logIn(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "log-in-page";
+    }
+
+    @PostMapping("/checkUser")
+    public String checkUser(@ModelAttribute(name="user") User user){
+        return userService.checkEmailAndPassword(user);
+    }
+
     @PostMapping("/save")
-    public String create(@ModelAttribute(name = "user") User user) {
-        userService.create(user);
-        return "redirect:/api/users/all";
+    public String create(@Valid @ModelAttribute(name = "user") User user, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "redirect:/api/users/addUser";
+        }
+        else {
+            userService.create(user);
+            if(user.getRole().equals(Role.USER)){
+                return "redirect:/api/dishes/menu";
+            }
+            else {
+                return "redirect:/api/users/all";
+            }
+        }
     }
 
     @GetMapping("/updateUser")

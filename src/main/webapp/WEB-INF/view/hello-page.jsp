@@ -3,7 +3,9 @@
 <html>
 <body>
 
-<h2>All users</h2>
-
+<h2>First page</h2>
+<br><br>
+<input type="button" value="Registration" onclick="window.location.href = 'registration'"/>
+<input type="button" value="Log in" onclick="window.location.href = 'logIn'"/>
 </body>
 </html>
