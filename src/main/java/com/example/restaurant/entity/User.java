@@ -58,9 +58,8 @@ public class User implements Serializable {
     @PositiveOrZero
     private double balance;
 
-//    @OneToMany
-//    @JoinColumn(name="user_id")
-//    private List<Order> order;
+    @OneToMany(mappedBy = "userId")
+    private List<Order> order;
 
 
     public User(String name, String surname, String phone, String email, String password, Role role, double balance) {

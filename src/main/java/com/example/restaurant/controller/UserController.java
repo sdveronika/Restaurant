@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,12 +60,16 @@ public class UserController {
     }
 
     @PostMapping("/checkUser")
-    public String checkUser(@ModelAttribute(name="user") User user){
+    public String checkUser(@ModelAttribute(name="user") User user, HttpSession session){
+        session.setAttribute("email",user.getEmail());
         return userService.checkEmailAndPassword(user);
     }
 
     @PostMapping("/save")
-    public String create(@Valid @ModelAttribute(name = "user") User user, BindingResult bindingResult) {
+    public String create(@Valid @ModelAttribute(name = "user") User user,
+                         BindingResult bindingResult,
+                         HttpSession session) {
+        session.setAttribute("email",user.getEmail());
         if(bindingResult.hasErrors()){
             return "redirect:/api/users/addUser";
         }

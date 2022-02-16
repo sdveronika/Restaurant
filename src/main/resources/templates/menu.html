@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ресторан</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th><a href="index">Главная</a></th>
+        <th><a href="menu">Меню</a></th>
+        <th><a href="basket">Корзина (<span th:text="${session.basket_quantity}"></span></a>)</th>
+    </tr>
+</table>
+
+<div id="header">
+    <h1>Ресторан</h1>
+    <p class="descript">Что не делается - все к лучшему</p>
+</div>
+<p align="right">Hello, <span th:text="${session.username} ?: 'Guest'"></span>.</p>
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Категория</th>
+        <th>Цена, руб.</th>
+    </tr>
+    <th:block th:each="dish : ${dishes}">
+        <tr>
+            <td th:text="${dish.name}"></td>
+            <td th:text="${dish.description}"></td>
+            <td th:text="${dish.category}"></td>
+            <td th:text="${dish.price}"></td>
+            <td ></td>
+        </tr>
+    </th:block>
+</table>
+
+
+
+
+</body>
+</html>

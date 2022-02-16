@@ -1,0 +1,24 @@
+#header{
+  position:relative;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+  background-image: url("img/head_picture.jpg");
+}
+h1{
+  color: #000000;
+  font: 40px Georgia;
+  margin-left: 500px;
+}
+.descript{
+  width: 700px;
+  color: #000000;
+  font-style: italic;
+  margin: 70px 0 0 30px;
+  font-size:22px;
+}
+img{
+  position:absolute;
+  top:10px;
+  left:10px;
+}
