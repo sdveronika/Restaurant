@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Ресторан</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+  <tr>
+    <th><a href="/api/users/index2">Главная</a></th>
+    <th><a href="/api/dishes/menu">Меню</a></th>
+  </tr>
+</table>
+
+<div id="header">
+  <h1>Ресторан</h1>
+</div>
+<th>Сумма заказа (<span th:text="${session.amount}"></span></a>)</th>
+<!--<span th:value="${session.dishes}"></span></a>-->
+<span th:value="${session.user}"></span></a>
+<th><form th:action="@{/api/orders/createOrder}" method="get">
+  <input type="hidden" th:name="dishes" th:value="${dishes}"/>
+  <input type="submit" value="Оформить заказ"/>
+</form></th>
+
+
+<p align="right">Hello, <span th:text="${session.name} ?: 'Guest'"></span>.</p>
+
+<table>
+  <tr>
+    <th>Название</th>
+    <th>Описание</th>
+    <th>Категория</th>
+    <th>Цена, руб.</th>
+  </tr>
+  <th:block th:each="dish : ${dishes}">
+    <tr>
+      <td th:text="${dish.name}"></td>
+      <td th:text="${dish.description}"></td>
+      <td th:text="${dish.category}"></td>
+      <td th:text="${dish.price}"></td>
+      <td><form th:action="@{/api/dishes/removeFromBasket}" method="get">
+        <input type="hidden" th:name="dishId" th:value="${dish.id}"/>
+        <input type="submit" value="Удалить корзины"/></form></td>
+      <td ></td>
+    </tr>
+  </th:block>
+</table>
+
+
+
+<span th:value="${session.user}"></span></a>
+</body>
+</html>

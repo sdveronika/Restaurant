@@ -1,11 +1,11 @@
 package com.example.restaurant.repository;
 
-import com.example.restaurant.entity.Dishes;
+import com.example.restaurant.entity.Dish;
 import com.example.restaurant.entity.enums.CategoryOfDish;
 
 import java.util.List;
 
-public interface IDishRepository extends Repository<Dishes,Long>{
+public interface IDishRepository extends Repository<Dish,Long>{
 
-    List<Dishes> findByCategory(CategoryOfDish category);
+    List<Dish> findByCategory(CategoryOfDish category);
 }

@@ -10,11 +10,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name="order")
+@Table(name="orders")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order implements Serializable {
@@ -34,7 +35,7 @@ public class Order implements Serializable {
     private OrderStatus status;
 
     @Column(name="confirm_time")
-    private String confirmTime;
+    private LocalDateTime confirmTime;
 
     @Column(name="comment")
     @Size(message="Comments must be no more than 100 characters")
@@ -48,12 +49,12 @@ public class Order implements Serializable {
     private long userId;
 
     @ManyToMany
-    @JoinTable(name="order_has_dishes",
-            joinColumns = @JoinColumn(name="order_id"),
+    @JoinTable(name="orders_has_dishes",
+            joinColumns = @JoinColumn(name="orders_id"),
             inverseJoinColumns = @JoinColumn(name="dishes_id"))
-    private List<Dishes> dishes;
+    private List<Dish> dishes;
 
-    public Order(double amount, OrderStatus status, String confirmTime, String comment, String deliveryAddress, long userId) {
+    public Order(double amount, OrderStatus status, LocalDateTime confirmTime, String comment, String deliveryAddress, long userId) {
         this.amount = amount;
         this.status = status;
         this.confirmTime = confirmTime;

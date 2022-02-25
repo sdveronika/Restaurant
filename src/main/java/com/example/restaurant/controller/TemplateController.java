@@ -1,43 +1,32 @@
 package com.example.restaurant.controller;
 
-
-import com.example.restaurant.auth.ApplicationUser;
-import com.example.restaurant.entity.Dishes;
-import com.example.restaurant.service.impl.DishService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.example.restaurant.entity.User;
+import com.example.restaurant.entity.enums.Role;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+
 
 @Controller
 @RequestMapping("/")
 public class TemplateController {
 
-    @Autowired
-    private DishService dishService;
-
     @GetMapping("index")
-    public String getIndexPage(HttpSession session) {
-        ApplicationUser user = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("username", user.getUsername());
-        session.setAttribute("basket_quantity", "0");
+    public String getIndexPage(HttpSession session){
+        User user=new User();
+        user.setRole(Role.GUEST);
+        session.setAttribute("user",user);
         return "index";
     }
 
-    @GetMapping("login")
-    public String getLoginPage() {
-        return "login";
+    @GetMapping("/no-access")
+    public String noAccess(){
+        return "no-access";
     }
 
-    @GetMapping("menu")
-    public String getMenuPage(Model model) {
-        List<Dishes> dishList = dishService.findAll();
-        model.addAttribute("dishes", dishList);
-        return "menu";
-    }
 }
+
+//TODO
+//Валидация
+//Добавить исключения
+

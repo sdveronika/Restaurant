@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ресторан</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th><a href="/api/users/index3">Главная</a></th>
+    </tr>
+</table>
+
+<div id="header">
+    <h1>Ресторан</h1>
+</div>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Счет</th>
+        <th>Статус</th>
+        <th>Время заказа</th>
+        <th>Комментарий</th>
+        <th>Адрес доставки</th>
+        <th>Id клиента</th>
+
+    </tr>
+    <th:block th:each="order : ${orders}">
+        <tr>
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.amount}"></td>
+            <td th:text="${order.status}"></td>
+            <td th:text="${order.confirmTime}"></td>
+            <td th:text="${order.comment}"></td>
+            <td th:text="${order.deliveryAddress}"></td>
+            <td th:text="${order.userId}"></td>
+            <td><form th:action="@{/api/orders/updateOrder}" method="get">
+                <input type="hidden" th:name="orderId" th:value="${order.id}"/>
+                <input type="submit" value="Подтвердить заказ"/>
+            </form></td>
+            <td><form th:action="@{/api/orders/findOrder}" method="get">
+                <input type="hidden" th:name="orderId" th:value="${order.id}"/>
+                <input type="submit" value="Блюда в заказе"/>
+            </form></td>
+<!--            <td><form th:action="@{/api/orders/deleteOrder}" method="get">-->
+<!--                <input type="hidden" th:name="userId" th:value="${order.userId}"/>-->
+<!--                <input type="submit" value="Найти заказчика"/>-->
+<!--            </form></td>-->
+            <td ></td>
+        </tr>
+    </th:block>
+</table>
+<span th:value="${session.user}"></span></a>
+</body>
+</html>

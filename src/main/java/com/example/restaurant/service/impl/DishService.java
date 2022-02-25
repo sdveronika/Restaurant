@@ -1,6 +1,6 @@
 package com.example.restaurant.service.impl;
 
-import com.example.restaurant.entity.Dishes;
+import com.example.restaurant.entity.Dish;
 import com.example.restaurant.entity.enums.CategoryOfDish;
 import com.example.restaurant.repository.impl.DishRepository;
 import com.example.restaurant.service.IDishService;
@@ -18,25 +18,25 @@ public class DishService implements IDishService {
 
     @Override
     @Transactional
-    public List<Dishes> findByCategory(CategoryOfDish category) {
+    public List<Dish> findByCategory(CategoryOfDish category) {
         return dishRepository.findByCategory(category);
     }
 
     @Override
     @Transactional
-    public List<Dishes> findAll() {
+    public List<Dish> findAll() {
         return dishRepository.findAll();
     }
 
     @Override
     @Transactional
-    public Dishes findById(Long id) {
+    public Dish findById(Long id) {
         return dishRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public void create(Dishes dish) {
+    public void create(Dish dish) {
         dishRepository.create(dish);
     }
 

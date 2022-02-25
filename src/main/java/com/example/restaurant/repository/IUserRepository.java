@@ -2,9 +2,10 @@ package com.example.restaurant.repository;
 
 import com.example.restaurant.entity.User;
 
+import java.util.List;
+
 public interface IUserRepository extends Repository<User,Long>{
 
-    String checkEmailAndPassword(User user);
-
+    List<User> findByEmailAndPassword(User user);
 
 }

@@ -14,5 +14,5 @@ public interface IUserService {
 
     void delete(long id);
 
-    String checkEmailAndPassword(User user);
+    List<User> findByEmailAndPassword(User user);
 }

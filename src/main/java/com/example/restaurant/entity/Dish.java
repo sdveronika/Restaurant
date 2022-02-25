@@ -1,6 +1,7 @@
 package com.example.restaurant.entity;
 
 import com.example.restaurant.entity.enums.CategoryOfDish;
+import com.example.restaurant.entity.enums.DishStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,15 +11,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
 
 @Data
 @Entity
 @Table(name="dishes")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dishes implements Serializable {
+public class Dish implements Serializable {
 
     @Id
     @Column(name="id")
@@ -44,14 +43,18 @@ public class Dishes implements Serializable {
     @PositiveOrZero
     private double price;
 
-    @ManyToMany
-    @JoinTable(name="order_has_dishes",
-            joinColumns = @JoinColumn(name="dishes_id"),
-            inverseJoinColumns = @JoinColumn(name="order_id"))
-    private List<Dishes> dishes;
+    @Column(name="status")
+    @Enumerated(EnumType.STRING)
+    private DishStatus status;
+
+//    @ManyToMany
+//    @JoinTable(name="order_has_dishes",
+//            joinColumns = @JoinColumn(name="dishes_id"),
+//            inverseJoinColumns = @JoinColumn(name="order_id"))
+//    private List<Order> orders;
 
 
-    public Dishes(String name, String description, CategoryOfDish category, double price) {
+    public Dish(String name, String description, CategoryOfDish category, double price) {
         this.name = name;
         this.description = description;
         this.category = category;

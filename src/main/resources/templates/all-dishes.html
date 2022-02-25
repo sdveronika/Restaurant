@@ -9,32 +9,39 @@
 <body>
 <table>
     <tr>
-        <th><a href="/api/users/index2">Главная</a></th>
-        <th><a href="/api/dishes/basket">Корзина (<span th:text="${session.basket_quantity}"></span></a>)</th>
+        <th><a href="/api/users/index3">Главная</a></th>
     </tr>
 </table>
-
 <div id="header">
     <h1>Ресторан</h1>
 </div>
-<p align="right">Hello, <span th:text="${session.name} ?: 'Guest'"></span>.</p>
-
+<td><input type="button" value="Добавить" onclick="window.location.href = '/api/dishes/addDish'" /></td>
 <table>
     <tr>
+        <th>Id</th>
         <th>Название</th>
         <th>Описание</th>
         <th>Категория</th>
-        <th>Цена, руб.</th>
+        <th>Стоимость</th>
+        <th>Статус</th>
+
     </tr>
     <th:block th:each="dish : ${dishes}">
         <tr>
+            <td th:text="${dish.id}"></td>
             <td th:text="${dish.name}"></td>
             <td th:text="${dish.description}"></td>
             <td th:text="${dish.category}"></td>
             <td th:text="${dish.price}"></td>
-           <td><form th:action="@{/api/dishes/addToBasket}" method="get">
-               <input type="hidden" th:name="dishId" th:value="${dish.id}"/>
-               <input type="submit" value="Добавить в корзину"/></form></td>
+            <td th:text="${dish.status}"></td>
+            <td><form th:action="@{/api/dishes/updateDish}" method="get">
+                <input type="hidden" th:name="dishId" th:value="${dish.id}"/>
+                <input type="submit" value="Обновить"/>
+            </form></td>
+            <td><form th:action="@{/api/dishes/changeDishStatus}" method="get">
+                <input type="hidden" th:name="dishId" th:value="${dish.id}"/>
+                <input type="submit" value="Изменить статус"/>
+            </form></td>
             <td ></td>
         </tr>
     </th:block>

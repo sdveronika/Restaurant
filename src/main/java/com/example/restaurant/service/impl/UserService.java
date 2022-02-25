@@ -41,7 +41,7 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public String checkEmailAndPassword(User user) {
-        return userRepository.checkEmailAndPassword(user);
+    public List<User> findByEmailAndPassword(User user) {
+        return userRepository.findByEmailAndPassword(user);
     }
 }

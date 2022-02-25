@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ресторан</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th><a href="/api/users/index3">Главная</a></th>
+    </tr>
+</table>
+
+<div id="header">
+    <h1>Ресторан</h1>
+</div>
+<form th:action="@{/api/dishes/saveDish}" th:object="${dish}" method="post">
+    <table>
+        <tr>
+            <td><input type="hidden" th:field="*{id}" /></td>
+        </tr>
+        <tr>
+            <td><input type="hidden" th:field="*{status}" /></td>
+        </tr>
+        <tr>
+            <td>Название</td>
+            <td><input type="text" th:field="*{name}" /></td>
+            <td  th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Описание</td>
+            <td><input type="text" th:field="*{description}" /></td>
+            <td  th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Категория</td>
+            <td><input type="text" th:field="*{category}" /></td>
+        </tr>
+        <tr>
+            <td>Стоимость</td>
+            <td><input type="text" th:field="*{price}" /></td>
+            <td  th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Name Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+<span th:value="${session.user}"></span></a>
+</body>
+</html>

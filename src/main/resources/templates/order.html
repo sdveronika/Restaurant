@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Create an account</title>
+</head>
+<body>
+<form th:action="@{/api/orders/saveOrder}" th:object="${order}" method="get">
+    <table>
+        <tr>
+            <td>Комментарий к заказу:</td>
+            <td><input type="text" th:field="*{comment}" /></td>
+        </tr>
+        <tr>
+            <td>Адресс доставки:</td>
+            <td><input type="text" th:field="*{deliveryAddress}" /></td>
+        </tr>
+        <tr>
+            <td><input type="hidden" th:field="*{amount}" /></td>
+
+        </tr>
+        <tr>
+            <td><input type="hidden" th:field="*{status}" /></td>
+
+        </tr>
+        <tr>
+            <td><input type="hidden" th:field="*{userId}" /></td>
+
+        </tr>
+<!--        <tr>-->
+<!--            <td><input type="hidden" th:field="*{dishes}" /></td>-->
+
+<!--        </tr>-->
+
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+<span th:value="${session.user}"></span></a>
+</body>
+</html>

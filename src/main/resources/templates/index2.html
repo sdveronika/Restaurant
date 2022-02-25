@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Ресторан</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<table>
+  <tr>
+    <th><a href="/api/dishes/menu">Меню</a></th>
+    <th><a href="/api/users/balance">Пополнить баланс</a></th>
+    <th><a href="/api/orders/all-orders">Заказы</a></th>
+    <th><a href="/api/users/logout">Выйти</a></th>
+  </tr>
+</table>
+
+<div id="header">
+  <h1>Ресторан</h1>
+</div>
+<p align="right">Hello, <span th:text="${session.name} ?: 'Guest'"></span>.</p>
+<span th:value="${session.user}"></span></a>
+</form>
+
+</body>
+</html>

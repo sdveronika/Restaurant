@@ -1,21 +1,20 @@
 package com.example.restaurant.service;
 
-import com.example.restaurant.entity.Dishes;
-import com.example.restaurant.entity.User;
+import com.example.restaurant.entity.Dish;
 import com.example.restaurant.entity.enums.CategoryOfDish;
 
 import java.util.List;
 
 public interface IDishService {
 
-    List<Dishes> findAll();
+    List<Dish> findAll();
 
-    Dishes findById(Long id);
+    Dish findById(Long id);
 
-    void create(Dishes dish);
+    void create(Dish dish);
 
     void delete(Long id);
 
-    List<Dishes> findByCategory(CategoryOfDish category);
+    List<Dish> findByCategory(CategoryOfDish category);
 
 }

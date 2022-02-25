@@ -14,8 +14,6 @@ import java.util.List;
 public class UserRepository implements IUserRepository {
 
 
-
-
     @Autowired
     private EntityManager entityManager;
 
@@ -45,31 +43,12 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public String checkEmailAndPassword(User user){
-        String page;
-        List<User> users=entityManager.unwrap(Session.class)
+    public List<User> findByEmailAndPassword(User user) {
+        return entityManager.unwrap(Session.class)
                 .createQuery("from User where email=:email", User.class)
-                .setParameter("email",user.getEmail())
+                .setParameter("email", user.getEmail())
                 .getResultList();
-        if(users.isEmpty()){
-            page ="redirect:/api/users/logIn";
-        }
-        else{
-            User user1=users.get(0);
-
-            if(user1.getEmail().equals(user.getEmail()) && user1.getPassword().equals(user.getPassword())){
-
-                if(user1.getRole().equals(Role.USER)){
-                page= "redirect:/api/dishes/menu";
-                }
-                else{
-                    page= "redirect:/api/users/all";
-                }
-            }
-            else{
-                page ="redirect:/api/users/logIn";
-            }
-        }
-        return page;
     }
+
+
 }
